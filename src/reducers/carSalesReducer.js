@@ -1,10 +1,40 @@
 export const ADD_FEATURE = "ADD_FEATURE";
 export const REMOVE_FEATURE = "REMOVE_FEATURE";
+export const SELECT_VEHICLE = "SELECT_VEHICLE";
 
 //api call here to add vehicles?
 
 export const initialState = {
+    currentCar: 0,//todo: implement a car list from the home page
     additionalPrice: 0,//the additional amount is the sum of the additional features added
+
+    cars: [
+        {
+            id: 0,
+            price: 26395,
+            name: '2019 Ford Mustang',
+            image:
+                'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
+            features: []
+        },
+        {
+            id: 1,
+            price: 35310,
+            name: '2019 Toyota 4Runner',
+            image:
+                'https://cdn.motor1.com/images/mgl/WwvEg/s1/2019-toyota-4runner-nightshade-edition.jpg',
+            features: []
+        },
+        {
+            id: 2,
+            price: 34600,
+            name: '2020 Chevy Silverado',
+            image:
+                'https://cdn.motor1.com/images/mgl/WkB73/s1/2020-chevrolet-silverado-hd-high-country.jpg',
+            features: []
+        }
+    ],
+
     car: {
         price: 26395,
         name: '2019 Ford Mustang',
@@ -56,6 +86,11 @@ export const carSalesReducer = (state = initialState, action) =>{
                 additionalFeatures: [...additionalFeatsList],
                 additionalPrice: state.additionalPrice - action.payload.price,
                 car: {...state.car, features: [...removedFeatureList]}
+            };
+        case SELECT_VEHICLE:
+            return {
+                ...state,
+                car: state.cars[action.payload]
             };
         default:
             return state;
