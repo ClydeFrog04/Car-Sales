@@ -27,7 +27,8 @@ export const carSalesReducer = (state = initialState, action) =>{
              */
 
             //setting up this variable so that we can move features from added to not added lists easily
-            const addedFeaturesList = [...state.car.features];
+            const addedFeaturesList = [...state.car.features, action.payload];
+            console.log(addedFeaturesList);
             const additionalFeaturesList = state.additionalFeatures.filter(feature =>{
                 if(feature.id !== action.payload.id) return feature;
             });
@@ -36,7 +37,7 @@ export const carSalesReducer = (state = initialState, action) =>{
                 ...state,
                 additionalFeatures: additionalFeaturesList,
                 additionalPrice: state.additionalPrice + action.payload.price,//updating additionalPrice
-                car: {...state.car, features:[...state.car.features, action.payload]}//adding the new feature with action.payload
+                car: {...state.car, features:addedFeaturesList}//adding the new feature with action.payload
             };
 
         case REMOVE_FEATURE:
