@@ -1,5 +1,8 @@
 export const ADD_FEATURE = "ADD_FEATURE";
 export const REMOVE_FEATURE = "REMOVE_FEATURE";
+
+//api call here to add vehicles?
+
 export const initialState = {
     additionalPrice: 0,//the additional amount is the sum of the additional features added
     car: {
@@ -26,9 +29,8 @@ export const carSalesReducer = (state = initialState, action) =>{
             add the feature to the car.features list so it can be passed to the addedfeatures component
              */
 
-            //setting up this variable so that we can move features from added to not added lists easily
+            //setting up this block so that we can move features from added to not added lists easily
             const addedFeaturesList = [...state.car.features, action.payload];
-            console.log(addedFeaturesList);
             const additionalFeaturesList = state.additionalFeatures.filter(feature =>{
                 if(feature.id !== action.payload.id) return feature;
             });
@@ -42,7 +44,7 @@ export const carSalesReducer = (state = initialState, action) =>{
 
         case REMOVE_FEATURE:
 
-            //setting up this variable so that we can move features from added to not added lists easily
+            //setting up this block so that we can move features from added to not added lists easily
             const additionalFeatsList = [...state.additionalFeatures];
             const removedFeatureList = state.car.features.filter(feature =>{
                 if(feature.id !== action.payload.id) return feature;
