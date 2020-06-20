@@ -1,11 +1,10 @@
-import React, {useReducer} from 'react';
+import React from 'react';
 import {addFeature} from "../actions";
 import {connect} from "react-redux";
 import {carSalesReducer, initialState} from "../reducers/carSalesReducer";
 
 const AdditionalFeature = props => {
 
-    const [state, dispatch] = useReducer(carSalesReducer, initialState);
     return (
         <li>
             {/* Add an onClick that will let you add a feature to your car */}

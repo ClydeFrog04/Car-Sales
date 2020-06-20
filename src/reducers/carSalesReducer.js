@@ -1,4 +1,5 @@
 export const ADD_FEATURE = "ADD_FEATURE";
+export const REMOVE_FEATURE = "REMOVE_FEATURE";
 export const initialState = {
     additionalPrice: 0,//the additional amount is the sum of the additional features added
     car: {
@@ -24,10 +25,34 @@ export const carSalesReducer = (state = initialState, action) =>{
             update the additional price total
             add the feature to the car.features list so it can be passed to the addedfeatures component
              */
+
+            //setting up this variable so that we can move features from added to not added lists easily
+            const addedFeaturesList = [...state.car.features];
+            const additionalFeaturesList = state.additionalFeatures.filter(feature =>{
+                if(feature.id !== action.payload.id) return feature;
+            });
+
             return{
                 ...state,
+                additionalFeatures: additionalFeaturesList,
                 additionalPrice: state.additionalPrice + action.payload.price,//updating additionalPrice
                 car: {...state.car, features:[...state.car.features, action.payload]}//adding the new feature with action.payload
+            };
+
+        case REMOVE_FEATURE:
+
+            //setting up this variable so that we can move features from added to not added lists easily
+            const additionalFeatsList = [...state.additionalFeatures];
+            const removedFeatureList = state.car.features.filter(feature =>{
+                if(feature.id !== action.payload.id) return feature;
+                else additionalFeatsList.push(action.payload)
+            });
+
+            return{
+                ...state,
+                additionalFeatures: [...additionalFeatsList],
+                additionalPrice: state.additionalPrice - action.payload.price,
+                car: {...state.car, features: [...removedFeatureList]}
             };
         default:
             return state;
