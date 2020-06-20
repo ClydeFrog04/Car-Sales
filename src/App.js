@@ -21,6 +21,7 @@ const App = (props) => {
             <Route path="/sales">
                 <div className="boxes">
                     <div className="box">
+                        <button className="home button" onClick={() => history.push("/")}>{"<-"}Select Another Car</button>
                         <Header car={props.car}/>
                         <AddedFeatures car={props.car}/>
                     </div>
