@@ -11,6 +11,14 @@ const HomePage = (props) => {//todo: what should the return type be instead of "
                 <ol type="1">
                     <li>
                         <button className="button" onClick={() => {
+                            props.selectVehicle(0);
+                            props.history.push("/sales");
+                        }}>select this car
+                        </button>
+                        2019 Ford Mustang
+                    </li>
+                    <li>
+                        <button className="button" onClick={() => {
                             props.selectVehicle(1);
                             props.history.push("/sales");
                         }}>select this car
@@ -18,8 +26,12 @@ const HomePage = (props) => {//todo: what should the return type be instead of "
                         2019 Toyota 4Runner
                     </li>
                     <li>
-                        <button className="button">select this car</button>
-                        2015 Chevy Silverado
+                        <button className="button" onClick={() => {
+                            props.selectVehicle(2);
+                            props.history.push("/sales");
+                        }}>select this car
+                        </button>
+                        2020 Chevy Silverado
                     </li>
                 </ol>
             </div>

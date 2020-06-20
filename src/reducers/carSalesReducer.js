@@ -5,7 +5,6 @@ export const SELECT_VEHICLE = "SELECT_VEHICLE";
 //api call here to add vehicles?
 
 export const initialState = {
-    currentCar: 0,//todo: implement a car list from the home page
     additionalPrice: 0,//the additional amount is the sum of the additional features added
 
     cars: [
@@ -15,27 +14,47 @@ export const initialState = {
             name: '2019 Ford Mustang',
             image:
                 'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
-            features: []
+            features: [],
+            additionalFeatures: [
+                { id: 1, name: 'V-6 engine', price: 1500 },
+                { id: 2, name: 'Racing detail package', price: 1500 },
+                { id: 3, name: 'Premium sound system', price: 500 },
+                { id: 4, name: 'Rear spoiler', price: 250 }
+            ]
         },
         {
             id: 1,
-            price: 35310,
-            name: '2019 Toyota 4Runner',
+            price: 55985,
+            name: '2019 Toyota 4Runner Limited',
             image:
                 'https://cdn.motor1.com/images/mgl/WwvEg/s1/2019-toyota-4runner-nightshade-edition.jpg',
-            features: []
+            features: [],
+            additionalFeatures: [
+                { id: 1, name: 'Auto Running Boards', price: 500 },
+                { id: 2, name: 'Third Row Seating', price: 365 },
+                { id: 3, name: 'Sliding Rear Cargo Deck', price: 650 },
+                { id: 4, name: 'Auto Running Board Options', price: 1000 }
+            ]
         },
         {
             id: 2,
-            price: 34600,
+            price: 36335,
             name: '2020 Chevy Silverado',
             image:
                 'https://cdn.motor1.com/images/mgl/WkB73/s1/2020-chevrolet-silverado-hd-high-country.jpg',
-            features: []
+            features: [],
+            additionalFeatures: [
+                { id: 1, name: 'V8 Engine', price: 5055 },
+                { id: 2, name: 'High Country Package', price: 3800 },
+                { id: 3, name: 'Technology Package', price: 1875 },
+                { id: 4, name: 'Off Road Package', price: 350 },
+                { id: 5, name: 'Safety Package', price: 1095 },
+                { id: 6, name: 'Trailer Camera Package', price: 250 },
+            ]
         }
     ],
 
-    car: {
+    car: {//in theory this could be initialized to am emtpy object, but for now I haven't added error handling for that so I am leaving this here
         price: 26395,
         name: '2019 Ford Mustang',
         image:
@@ -90,7 +109,8 @@ export const carSalesReducer = (state = initialState, action) =>{
         case SELECT_VEHICLE:
             return {
                 ...state,
-                car: state.cars[action.payload]
+                car: state.cars[action.payload],
+                additionalFeatures: state.cars[action.payload].additionalFeatures,
             };
         default:
             return state;
